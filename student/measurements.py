@@ -62,6 +62,7 @@ class Sensor:
         
         return visible
         
+
         ############
         # END student code
         ############ 
@@ -84,7 +85,6 @@ class Sensor:
             ############
 
             hx = np.zeros((2, 1))
-            #pos_veh = np.zeros((4, 1))
             pos_veh = np.ones((4, 1))
             pos_veh[0:3] = x[0:3]
             pos_sens = self.veh_to_sens * pos_veh
@@ -97,7 +97,8 @@ class Sensor:
                 hx[1, 0] = self.c_j - self.f_j * pos_sens[2] / pos_sens[0]
                 
             return hx
-        
+            
+            
             ############
             # END student code
             ############ 
@@ -140,9 +141,9 @@ class Sensor:
         # TODO Step 4: remove restriction to lidar in order to include camera as well
         ############
         
-        #if self.name == 'lidar' or self.name == 'camera':
-        meas = Measurement(num_frame, z, self)
-        meas_list.append(meas)
+        if self.name == 'lidar' or self.name == 'camera':
+            meas = Measurement(num_frame, z, self)
+            meas_list.append(meas)
         return meas_list
         
         ############
@@ -187,9 +188,9 @@ class Measurement:
             self.z[1] = z[1]
             self.sensor = sensor
             self.R = np.matrix([[sigma_cam_i**2, 0],
-                                [0, sigma_cam_j**2]])
-
-        
+                                 [0, sigma_cam_j**2]])
+            
+            
             ############
             # END student code
             ############ 
